@@ -12,13 +12,26 @@ export const Layout = (props: LayoutProps) => html`
     <html lang="en">
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <script src="https://unpkg.com/htmx.org@1.9.3"></script>
-            <script src="https://unpkg.com/hyperscript.org@0.9.9"></script>
             <script src="https://cdn.tailwindcss.com"></script>
             <title>${props.title || "Hono App"}</title>
         </head>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                let count = 0;
+                const incrementButton = document.getElementById("incrementButton");
+                incrementButton.addEventListener("click", () => {
+                    count++;
+                    document.getElementById("counter").innerText = count;
+                });
+            });
+        </script>
         <body class="p-5">
-            ${props.children}
+            <div id="staticContent" >
+                ${props.children}
+            </div>
+            <div>
+                <button id="incrementButton">Increment</button>
+                <span id="counter">0</span>
         </body>
     </html>
 `;
